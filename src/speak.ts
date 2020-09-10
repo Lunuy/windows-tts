@@ -30,7 +30,7 @@ async function speak(text : string, speakOptions : SpeakOptions = {}) {
         `$text = "${escapePS(text)}";`,
         `$rate = ${rate};`,
         `$volume = ${volume};`,
-        ...(voice ? [`$voice = ${voice};`] : []),
+        ...(voice ? [`$voice = "${escapePS(voice)}";`] : []),
         ...commands
     ]);
 
