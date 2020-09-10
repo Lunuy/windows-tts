@@ -4,6 +4,7 @@ import path from "path";
 import SpeakOptions from "./SpeakOptions";
 import loadPSCommands from "./loadPSCommands";
 import runCommands from "./runCommands";
+import escapePS from "./escapePS";
 
 let talkedOnce = false;
 
@@ -26,7 +27,7 @@ async function speak(text : string, speakOptions : SpeakOptions = {}) {
     const commands = await loadPSCommands(path.resolve(__dirname, "../ps/speak.ps1"));
 
     const result = await runCommands([
-        `$text = "${text}";`,
+        `$text = "${escapePS(text)}";`,
         `$rate = ${rate};`,
         `$volume = ${volume};`,
         ...(voice ? [`$voice = ${voice};`] : []),
